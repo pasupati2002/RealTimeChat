@@ -18,8 +18,10 @@ import messageRoutes from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
 
 const PORT = process.env.PORT;
-const FRONTEND_URL = process.env.FRONTEND_URL;
+// const FRONTEND_URL = process.env.FRONTEND_URL;
 
+
+const FRONTEND_URL = 'http://localhost:5173/'
 const publicDir = path.join(process.cwd(), "public");
 
 // it's important that you don't parse the webhook event data, it should be in the raw format
