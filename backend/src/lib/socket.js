@@ -5,9 +5,23 @@ import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigin = process.env.FRONTEND_URL || "http://localhost:5173";
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
-const io = new Server(server, { cors: { origin: [allowedOrigin] } });
+const allowedOrigins = Array.from(
+  new Set([
+    ...(FRONTEND_URL
+      ? FRONTEND_URL.split(",").map((url) => url.trim().replace(/\/$/, ""))
+      : []),
+    "http://localhost:5173",
+  ])
+);
+
+const io = new Server(server, {
+  cors: {
+    origin: allowedOrigins,
+    credentials: true,
+  },
+});
 
 function getReceiverSocketId(userId) {
   return userSocketMap[userId];
