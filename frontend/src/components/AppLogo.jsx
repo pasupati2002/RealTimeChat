@@ -1,4 +1,4 @@
-export const APP_NAME = "RealTime_Chat";
+export const APP_NAME = "PulseChat";
 
 export function AppLogo({ className = "", size = 32, alt = APP_NAME }) {
   return (
