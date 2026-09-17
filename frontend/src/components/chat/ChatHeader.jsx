@@ -26,6 +26,7 @@ export function ChatHeader() {
           size="sm"
           isIconOnly
           className="shrink-0"
+          aria-label="Back to conversations"
           onPress={() => setActiveConversationId(null)}
         >
           <ChevronLeftIcon className="size-6" strokeWidth={2.25} />
@@ -81,6 +82,7 @@ export function ChatHeader() {
           size="sm"
           isIconOnly
           className="shrink-0"
+          aria-label={isSoundEnabled ? "Mute sound" : "Unmute sound"}
           aria-pressed={isSoundEnabled}
           onPress={() => setSoundEnabled(!isSoundEnabled)}
         >

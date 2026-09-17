@@ -15,10 +15,12 @@ export function ThemePresetPicker() {
 
   return (
     <Modal.Root state={modal}>
-      <Modal.Trigger>
-        <Button variant="ghost" size="sm" isIconOnly className="text-foreground">
-          <Palette className="size-5" />
-        </Button>
+      <Modal.Trigger
+        tabIndex={0}
+        aria-label="Change theme preset"
+        className="inline-flex size-8 items-center justify-center rounded-lg text-foreground hover:bg-foreground/10 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      >
+        <Palette className="size-5" />
       </Modal.Trigger>
 
       <Modal.Backdrop variant="opaque">

@@ -27,8 +27,6 @@ function mapUserForList(user, onlineUsers) {
 
 function ChatSidebar() {
   const conversations = useChatStore((state) => state.conversations);
-
-  console.log(conversations);
   const users = useChatStore((state) => state.users);
 
   const searchQuery = useChatStore((state) => state.searchQuery);
@@ -88,6 +86,7 @@ function ChatSidebar() {
       >
         <div className="shrink-0 border-b border-border px-3 pb-2 pt-2">
           <SearchField
+            aria-label="Search"
             fullWidth
             variant="secondary"
             className="w-full"

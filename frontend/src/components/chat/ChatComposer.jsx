@@ -69,6 +69,7 @@ export function ChatComposer() {
         <Button
           variant="ghost"
           isIconOnly
+          aria-label="Attach media"
           isDisabled={isSendingMedia}
           className="size-9 shrink-0 touch-manipulation self-end text-accent"
           onPress={() => mediaInputRef.current?.click()}
@@ -76,6 +77,7 @@ export function ChatComposer() {
           <ImageIcon className="size-5 sm:size-6" strokeWidth={2} />
         </Button>
         <TextArea
+          aria-label="Message"
           fullWidth
           variant="secondary"
           placeholder="iMessage"
@@ -91,7 +93,13 @@ export function ChatComposer() {
           className="flex-1 rounded-full"
         />
 
-        <Button variant="primary" isIconOnly isDisabled={!composerText.trim()} onPress={handleSend}>
+        <Button
+          variant="primary"
+          isIconOnly
+          aria-label="Send message"
+          isDisabled={!composerText.trim()}
+          onPress={handleSend}
+        >
           <SendHorizontalIcon className="size-5" />
         </Button>
       </div>
