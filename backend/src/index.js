@@ -83,10 +83,25 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const publicDir = path.join(process.cwd(), "public");
 
+// Build the list of allowed origins.
+// FRONTEND_URL can hold one or more comma-separated URLs in your .env,
+// e.g. FRONTEND_URL=https://real-time-chat-navy.vercel.app,http://localhost:5173
+const allowedOrigins = [
+  ...(FRONTEND_URL ? FRONTEND_URL.split(",").map((url) => url.trim()) : []),
+  "http://localhost:5173", // always allow local dev
+];
+
 // CORS configuration
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: function (origin, callback) {
+      // allow requests with no origin (curl, Postman, server-to-server, mobile apps)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Not allowed by CORS: ${origin}`));
+      }
+    },
     credentials: true,
   })
 );
@@ -126,10 +141,9 @@ server.listen(PORT, () => {
   connectDB();
 
   console.log("Server is up and running on PORT:", PORT);
-  console.log("Frontend URL:", FRONTEND_URL);
+  console.log("Allowed origins:", allowedOrigins);
 
   if (process.env.NODE_ENV === "production") {
     job.start();
   }
 });
-
